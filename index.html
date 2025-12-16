@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C++ Online Compiler</title>
+    <meta name="author" content="Shivam Kumar">
+    <title>Online C++ Compiler</title>
     <style>
         * {
             margin: 0;
@@ -34,6 +35,7 @@
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: auto;
+            scrollbar-width: none;
         }
 
         .header {
@@ -41,30 +43,39 @@
             background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
             color: white;
             padding: 20px;
+            height: 10%;
             text-align: center;
+            box-sizing: border-box;
         }
 
         .header h1 {
-            font-size: 24px;
+            font-size: 21px;
             font-weight: 600;
         }
 
         .content {
             position: relative;
-            padding: 20px;
+            padding: 10px 10px;
+            height: 90%;
+            box-sizing: border-box;
         }
 
         .editor-section {
             position: relative;
             margin-bottom: 20px;
+            height: 100%;
 
+        }
+
+        .editor-section-right {
+            padding-bottom: 12px;
         }
 
         .section-title {
             font-size: 16px;
             font-weight: 600;
             color: #2d3748;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -80,7 +91,7 @@
             font-size: 14px;
             border: 2px solid #e2e8f0;
             border-radius: 8px;
-            resize: vertical;
+            resize: none;
             background: #f7fafc;
             color: #2d3748;
             line-height: 1.6;
@@ -186,7 +197,7 @@
             color: #68d391;
         }
 
-        @media (max-width: 768px) {
+        /* @media (max-width: 768px) {
             .header h1 {
                 font-size: 20px;
             }
@@ -208,7 +219,7 @@
             .output-section {
                 font-size: 13px;
             }
-        }
+        } */
 
         @media (max-width: 480px) {
             body {
@@ -220,13 +231,21 @@
             }
 
             .content {
-                padding: 10px;
+                padding: 5px;
             }
 
             .code-editor {
                 min-height: 400px;
                 font-size: 14px;
                 padding: 10px;
+            }
+
+            .editor-section {
+                height: 100%;
+            }
+
+            .editor-section-right {
+                padding-bottom: 12px;
             }
 
             .btn {
@@ -239,9 +258,11 @@
             .header {
                 height: 10%;
             }
+
             .container {
                 overflow: hidden;
             }
+
             .content {
                 display: flex;
                 gap: 20px;
@@ -251,6 +272,7 @@
             .editor-section {
                 flex: 2;
             }
+
             .editor-section-right {
                 flex: 1;
             }
@@ -266,11 +288,13 @@
                 font-size: 18px;
                 font-weight: 600;
 
-              
+
             }
+
             .output-section {
                 font-size: 18px;
-              
+                overflow: auto;
+
             }
 
 
@@ -281,27 +305,29 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>C++ Online Compiler</h1>
+            <h1><strong>C++ Online Compiler</strong></h1>
         </div>
 
         <div class="content">
             <div class="editor-section">
                 <div class="section-title">
 
-                    <span>Write Your C++ Code</span>
+                    
                     <div class="controls">
                         <button class="btn btn-run" id="runBtn" onclick="runCode()">
-                            <span>▶</span>
+
                             <span>Run Code</span>
                         </button>
                         <button class="btn btn-clear" onclick="clearOutput()">
-                            <span>🗑️</span>
+
                             <span>Clear</span>
                         </button>
                     </div>
                 </div>
-                <textarea class="code-editor" id="codeEditor" spellcheck="false"
-                    placeholder="Write your C++ code here...">#include <iostream>
+                <textarea class="code-editor" id="codeEditor" spellcheck="false" placeholder="Write your C++ code here...
+std::cin is not supported yet.">// std::cin is not supported yet.
+
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
@@ -314,7 +340,7 @@ int main() {
 
             <div class="editor-section-right">
                 <div class="section-title">
-                    <span>💻</span>
+
                     <span>Output</span>
                 </div>
                 <div class="output-section" id="output">Ready to compile...</div>
@@ -357,10 +383,11 @@ int main() {
 
 
             const outputDiv = document.getElementById('output');
+            outputDiv.scrollIntoView({ behavior: "smooth" });
             const runBtn = document.getElementById('runBtn');
 
             if (!code.trim()) {
-                outputDiv.innerHTML = '<span class="error">⚠️ Error: Please write some code first!</span>';
+                outputDiv.innerHTML = '<span class="error"> Error: Write some code first!</span>';
                 return;
             }
 
@@ -388,23 +415,23 @@ int main() {
                     let output = '';
 
                     if (result.run.stdout) {
-                        output += '<span class="success">✅ Output:</span>\n' + result.run.stdout;
+                        output += '<span class="success"> Output:</span>\n\n' + result.run.stdout + '<span class="success"><br> End of Execution!</span>';
                     }
 
                     if (result.run.stderr) {
-                        output += (output ? '\n\n' : '') + '<span class="error">❌ Errors:</span>\n' + result.run.stderr;
+                        output += (output ? '\n\n' : '') + '<span class="error"> Errors:</span>\n' + result.run.stderr;
                     }
 
                     if (!result.run.stdout && !result.run.stderr) {
-                        output = '<span class="success">✅ Code compiled successfully! No output generated.</span>';
+                        output = '<span class="success">Code compiled successfully! No output generated.</span>';
                     }
 
                     outputDiv.innerHTML = output || '<span class="error">No output</span>';
                 } else {
-                    outputDiv.innerHTML = '<span class="error">❌ Error: Failed to execute code</span>';
+                    outputDiv.innerHTML = '<span class="error"> Error: Failed to execute code</span>';
                 }
             } catch (error) {
-                outputDiv.innerHTML = '<span class="error">❌ Error: ' + error.message + '</span>';
+                outputDiv.innerHTML = '<span class="error"> Error: ' + error.message + '</span>';
             } finally {
                 runBtn.disabled = false;
             }
