@@ -300,7 +300,8 @@
 
         }
       
-@media(max-height:400px), (max-width:400px){
+
+@media(max-height:300px), (max-width:300px){
   .header {
         padding: 0px;
         display: none;
@@ -335,14 +336,21 @@
         height: 100vh;
         padding: 4px;
         padding-top: 0;
-        margin-top: 5px;
+        margin-top: 0px;
     }
     .section-title{
-      height:4%;
+      height:10%;
+      width:100%;
+      padding-block: 5px
     }
     .output-section{
       font-size: 10px;
     }
+    .controls{
+      width:100%;
+      justify-content: space-evenly;
+    }
+    
 }
     </style>
 </head>
@@ -361,7 +369,7 @@
                     <div class="controls">
                         <button class="btn btn-run" id="runBtn" onclick="runCode()">
 
-                            <span>Run Code</span>
+                            <span>Run</span>
                         </button>
                         <button class="btn btn-clear" onclick="clearOutput()">
 
@@ -500,6 +508,7 @@ int main() {
 </body>
 
 </html>
+
 
 
 
